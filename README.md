@@ -1,4 +1,4 @@
-# Fast Parallel Rsync Wrapper (`dsync-perf`)
+# Fast Parallel Rsync Wrapper (`dsync.py`)
 
 A high-performance, non-blocking parallel wrapper for `rsync`, written in Python. Designed to synchronize massive directory structures (100M+ files, 100k+ directories) on enterprise storage arrays (NFS, GPFS, NetApp) by eliminating standard `rsync` I/O bottlenecks.
 
@@ -10,7 +10,7 @@ Standard `rsync` struggles with massive file trees due to sequential metadata sc
 3. **Immediate Orphan Cleanup (Phase 2):** A secondary thread pool concurrently scans the destination. It immediately identifies and deletes orphaned directory trees (structures that no longer exist in the source) without waiting for the entire synchronization to finish, preventing race conditions natively.
 
 ## ⚡ Performance
-In real-world production benchmarks on **143+ million items** across 175,000 directories, synchronization time was reduced from **~2 hours** to **~20 minutes** (an 80% performance increase).
+In real-world production benchmarks on **143+ million items** across 175,000 directories, synchronization time was reduced from **~8 hours** to **~20 minutes**.
 
 ## 📋 Requirements
 * Linux / Unix-like OS
@@ -21,4 +21,24 @@ In real-world production benchmarks on **143+ million items** across 175,000 dir
 
 Basic execution syntax:
 ```bash
-python3 dsync_perf.py /path/to/source/ /path/to/destination/ -w 60 --options="-ltD --delete --inplace --numeric-ids --no-perms --no-owner --modify-window=120"
+python3 dsync_perf.py -w NUMBER /path/to/source/ /path/to/destination/
+
+Full help:
+
+usage: dsync.py [-h] [-w WORKERS] [--options OPTIONS] [-d] [-n] [-l LOG_CHANGED] src dst
+
+Non-blocking parallel rsync wrapper with directory-level granularity.
+
+positional arguments:
+  src                   Source directory
+  dst                   Destination directory
+
+options:
+  -h, --help            show this help message and exit
+  -w WORKERS, --workers WORKERS
+                        Number of parallel workers for sync and cleanup (default: 8)
+  --options OPTIONS     Parameters for rsync. Default: '-lptgoD --delete'.
+  -d, --debug           Print detailed debug logging
+  -n, --dry-run         Simulation run without writing data to disk
+  -l LOG_CHANGED, --log-changed LOG_CHANGED
+                        Append paths of modified or deleted directories to log file
