@@ -21,7 +21,7 @@ In real-world production benchmarks on **143+ million items** across 175,000 dir
 
 Basic execution syntax:
 ```bash
-python3 dsync_perf.py -w NUMBER /path/to/source/ /path/to/destination/
+python3 dsync.py -w NUMBER /path/to/source/ /path/to/destination/
 
 Full help:
 
