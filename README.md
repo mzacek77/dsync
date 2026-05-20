@@ -10,7 +10,7 @@ Standard `rsync` struggles with massive file trees due to sequential metadata sc
 3. **Immediate Orphan Cleanup (Phase 2):** A secondary thread pool concurrently scans the destination. It immediately identifies and deletes orphaned directory trees (structures that no longer exist in the source) without waiting for the entire synchronization to finish, preventing race conditions natively.
 
 ## ⚡ Performance
-In real-world production benchmarks on **143+ million items** across 175,000 directories, synchronization time was reduced from **~8 hours** to **~20 minutes**.
+In real-world production benchmarks on **143+ million items** across 175,000 directories, second synchronization time was reduced from **~8 hours** to **~20 minutes**.
 
 ## 📋 Requirements
 * Linux / Unix-like OS
