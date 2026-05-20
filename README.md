@@ -1,4 +1,4 @@
-# Fast Parallel Rsync Wrapper (`dsync.py`)
+# Fast Parallel Rsync Wrapper (Heavily optimized by Gemini AI)
 
 A high-performance, non-blocking parallel wrapper for `rsync`, written in Python. Designed to synchronize massive directory structures (100M+ files, 100k+ directories) on enterprise storage arrays (NFS, GPFS, NetApp) by eliminating standard `rsync` I/O bottlenecks.
 
