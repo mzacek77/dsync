@@ -40,7 +40,7 @@ Execution Plans: Before any restore operation, dsync_restore.py traverses the ne
 
 ## Exmaple
 ```
-# backup/rsync
+# backup/rsync (Omitting --backup-dir disables reverse-incremental backups, performing a standard parallel rsync synchronization instead.)
 dsync_backup.py  /tmp/dsync_test/prod/   /tmp/dsync_test/mirror/  --backup-dir /tmp/dsync_test/history/  -w 2
 
 # list history
